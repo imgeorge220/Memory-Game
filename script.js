@@ -17,28 +17,36 @@ function setCards(){
        var row = "row" + (Math.floor((i-1)/5) + 1);
        var rowItem = document.getElementById(row);
         if (i === 13) {
-            var card = document.createElement("button");
-            card.setAttribute("id", "middle-card");
-            card.innerText = 0;
+            var container = document.createElement("div");
+            container.setAttribute("id", "middle-card");
+            container.innerText = 0;
         } else {
-            var card = document.createElement("button");
+            console.log("i: " + i + " row: " + row)
+            var container = document.createElement("div");
+            var card = document.createElement("div");
             var randNo = Math.floor(Math.random() * (25 - i));
+            container.classList.add("card-container")
             card.setAttribute('hiddenid', deck[randNo]);
             card.setAttribute("id", "card" + i);
             card.setAttribute("onclick", "revealCard(" + i + ")");
             card.setAttribute("locked", "false");
-            var icon = document.createElement("img");
-            var srcNo = Math.floor(deck[randNo]) + ".png";
-            icon.setAttribute("src", srcNo);
-            icon.setAttribute("id", 'picid' + deck[randNo])
-            icon.classList.add("card-image")
-            card.appendChild(icon);
+            card.classList.add("card");
+            var cardFront = document.createElement("div");
+            var cardBack = document.createElement("div");
+            // var icon = document.createElement("img");
+            // var srcNo = Math.floor(deck[randNo]) + ".png";
+            // icon.setAttribute("src", srcNo);
+            // icon.classList.add("card-image")
+            cardFront.classList.add("card-hidden", "card-flipping");
+            cardBack.classList.add("card-revealed", "card-flipping");
+            // cardBack.appendChild(icon);
+            cardBack.innerText = "FLIPPED!";
+            card.appendChild(cardFront);
+            card.appendChild(cardBack);
             deck.splice(randNo, 1);
+            container.appendChild(card);
         }
-        card.classList.add("card", "card-hidden"); 
-        console.log(rowItem)
-        console.log(card)
-        rowItem.appendChild(card);
+        rowItem.appendChild(container);
     }
     
 }
@@ -47,9 +55,7 @@ function revealCard(cardNo){
     var card = document.getElementById("card" + cardNo);
     if (card.getAttribute("locked") === "false"){
         card.setAttribute("locked", "true");
-        card.classList.add("card-revealed");
-        card.classList.remove("card-hidden");
-        card.innerText = card.getAttribute('hiddenid');
+        card.classList.add("flipped");
         var cardsChecked = JSON.parse(sessionStorage.getItem('cardsChecked'));
         cardsChecked.push(cardNo);
         sessionStorage.setItem('cardsChecked', JSON.stringify(cardsChecked));
@@ -58,7 +64,7 @@ function revealCard(cardNo){
             var card2 = cardsChecked[cardsChecked.length-1];
             sessionStorage.setItem('guesses', Number(sessionStorage.getItem('guesses')) + 1);
             document.getElementById('middle-card').innerText = sessionStorage.getItem('guesses');
-            window.setTimeout(checkMatch, 1000, card1, card2);
+            window.setTimeout(checkMatch, 1200, card1, card2);
         }
     }
 }
@@ -78,8 +84,5 @@ function checkMatch(card1,card2){
 
 function hideCard(cardNo) {
     var card = document.getElementById("card" + cardNo);
-    card.classList.add("card-hidden");
-    card.classList.remove("card-revealed");
-    card.innerText = '';
-    card.setAttribute("onclick", "revealCard(" + cardNo + ")");
+    card.classList.remove("flipped");
 }
