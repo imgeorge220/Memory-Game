@@ -1,3 +1,11 @@
+body{
+    background-color: lightskyblue;
+}
+h1{
+    text-align: center;
+    font-size: 30px;
+    width: 750px;
+}
 #deck-container{
     flex:1
 }
@@ -7,14 +15,11 @@
 }
 #middle-card{
     text-align: center;
-    background-color: lightblue;
     display: inline-block;
     font-size: 36px;
     height: 130px;
     width: 130px;
     margin: 10px;
-    border: 3px solid black;
-    border-radius: 25px;
     line-height: 130px;
 }
 .card-container {
@@ -62,10 +67,11 @@
   -o-transform:rotatey(-180deg);
   border: 3px solid black;
   border-radius: 25px;
+  text-align: center;
+  background-color: lightgreen;
 }
-
 .card-container .card .card-hidden {
-  background-color: #7030a0;
+  background-color: rgb(231, 89, 89);
   border: 3px solid black;
   border-radius: 25px;
 }

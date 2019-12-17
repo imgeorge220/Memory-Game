@@ -33,14 +33,14 @@ function setCards(){
             card.classList.add("card");
             var cardFront = document.createElement("div");
             var cardBack = document.createElement("div");
-            // var icon = document.createElement("img");
-            // var srcNo = Math.floor(deck[randNo]) + ".png";
-            // icon.setAttribute("src", srcNo);
-            // icon.classList.add("card-image")
+            var icon = document.createElement("img");
+            var srcNo = Math.floor(deck[randNo]) + ".png";
+            icon.setAttribute("src", srcNo);
+            icon.classList.add("card-image")
             cardFront.classList.add("card-hidden", "card-flipping");
             cardBack.classList.add("card-revealed", "card-flipping");
-            // cardBack.appendChild(icon);
-            cardBack.innerText = "FLIPPED!";
+            cardFront.innerText = deck[randNo];
+            cardBack.appendChild(icon);
             card.appendChild(cardFront);
             card.appendChild(cardBack);
             deck.splice(randNo, 1);
