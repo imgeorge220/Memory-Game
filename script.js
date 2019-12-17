@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", setSessionStorage());
 document.addEventListener("DOMContentLoaded", setCards());
-
+document.getElementById('reset-button').addEventListener("click", function () {location.reload();});
 
 function setSessionStorage(){
     sessionStorage.setItem('cardsChecked', '[]');
@@ -18,10 +18,16 @@ function setCards(){
        var rowItem = document.getElementById(row);
         if (i === 13) {
             var container = document.createElement("div");
+            var counter = document.createElement("div");
+            var reset = document.createElement("button");
             container.setAttribute("id", "middle-card");
-            container.innerText = 0;
+            counter.innerText = 0;
+            reset.innerText = "Reset";
+            reset.setAttribute("id", "reset-button");
+            counter.setAttribute("id", "counter");
+            container.appendChild(reset);
+            container.appendChild(counter);
         } else {
-            console.log("i: " + i + " row: " + row)
             var container = document.createElement("div");
             var card = document.createElement("div");
             var randNo = Math.floor(Math.random() * (25 - i));
@@ -39,7 +45,6 @@ function setCards(){
             icon.classList.add("card-image")
             cardFront.classList.add("card-hidden", "card-flipping");
             cardBack.classList.add("card-revealed", "card-flipping");
-            cardFront.innerText = deck[randNo];
             cardBack.appendChild(icon);
             card.appendChild(cardFront);
             card.appendChild(cardBack);
@@ -63,7 +68,7 @@ function revealCard(cardNo){
             var card1 =  cardsChecked[cardsChecked.length-2];
             var card2 = cardsChecked[cardsChecked.length-1];
             sessionStorage.setItem('guesses', Number(sessionStorage.getItem('guesses')) + 1);
-            document.getElementById('middle-card').innerText = sessionStorage.getItem('guesses');
+            document.getElementById('counter').innerText = sessionStorage.getItem('guesses');
             window.setTimeout(checkMatch, 1200, card1, card2);
         }
     }
