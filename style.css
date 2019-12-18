@@ -1,5 +1,7 @@
 body{
     background-color: lightskyblue;
+    display: flex;
+    justify-content: center;
 }
 h1{
     text-align: center;
@@ -7,12 +9,10 @@ h1{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 750px;
 }
-#deck-container{
-    flex:1
-}
 .card-row{
     width: 750px;
     display: flex;
+    justify-content: space-around;
 }
 #middle-card{
     text-align: center;
