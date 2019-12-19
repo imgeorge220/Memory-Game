@@ -6,7 +6,9 @@ function setSessionStorage(){
     sessionStorage.setItem('cardsChecked', '[]');
     sessionStorage.setItem('guesses', '0');
     sessionStorage.setItem('matches', '0');
-    // localStorage.setItem('max', 100);
+    if (localStorage.getItem('max') === null){
+        localStorage.setItem("max", "100");
+    }
 }
 
 function setCards(){
