@@ -48,11 +48,10 @@ function setCards(){
             var cardFront = document.createElement("div");
             var cardBack = document.createElement("div");
             var icon = document.createElement("img");
-            var srcNo = "/" + Math.floor(+ deck[randNo]) + ".png";
+            var srcNo = Math.floor(+ deck[randNo]) + ".png";
             icon.setAttribute("src", srcNo);
             icon.classList.add("card-image")
             cardFront.classList.add("card-hidden", "card-flipping");
-            cardFront.innerText = deck[randNo];
             cardBack.classList.add("card-revealed", "card-flipping");
             cardBack.appendChild(icon);
             card.appendChild(cardFront);
